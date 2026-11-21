@@ -23,7 +23,8 @@
 <div class="card wide"><div class="notice">تنبيه المخاطر: هذه إشارات تعليمية آلية وليست نصيحة استثمارية. مستويات الدخول والوقف والهدف تقديرية وفق ATR وليست أوامر وسيط. تحقق من الأسعار والسبريد لدى وسيطك واختبر على حساب تجريبي قبل أي مخاطرة.</div></div>
 </section><footer>HAIDAR AI TRADING TERMINAL · لا يوجد تنفيذ تلقائي للصفقات</footer></main>
 <script>
-const API='https://czezgeslfxhpbrtquffy.supabase.co/functions/v1/market-data-proxy';\nasync function apiRequest(payload,timeout=25000){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);try{return await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timer)}}
+const API='https://czezgeslfxhpbrtquffy.supabase.co/functions/v1/market-data-proxy';
+async function apiRequest(payload,timeout=25000){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);try{return await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timer)}}
 const $=id=>document.getElementById(id);let busy=false,installPrompt=null,catalog=null;const marketNames={forex:'الفوركس',stocks:'الأسهم',metals:'المعادن',energy:'الطاقة',indices:'المؤشرات',crypto:'الكريبتو',synthetics:'المؤشرات الاصطناعية'};
 const fmt=n=>Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:5}):'—';
 function status(s,ok=false){$('conn').textContent=s;$('conn').style.color=ok?'var(--green)':'var(--gold)'}
