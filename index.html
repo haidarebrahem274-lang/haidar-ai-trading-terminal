@@ -14,15 +14,21 @@
 <section class="panel">
 <label for="market">1 ـ اختيار السوق</label>
 <select id="market">
-<option value="XAUUSD">الذهب · XAUUSD</option><option value="EURUSD">اليورو دولار · EURUSD</option><option value="GBPUSD">الباوند دولار · GBPUSD</option><option value="USDJPY">الدولار ين · USDJPY</option><option value="BTCUSD">بيتكوين · BTCUSD</option><option value="ETHUSD">إيثيريوم · ETHUSD</option><option value="XAGUSD">الفضة · XAGUSD</option><option value="US500">ستاندرد آند بورز · US500</option><option value="US30">داو جونز · US30</option><option value="USOIL">النفط · USOIL</option>
+<option value="XAUUSD">الذهب · XAUUSD</option><option value="XAGUSD">الفضة · XAGUSD</option>
+<optgroup label="الفوركس"><option>EURUSD</option><option>GBPUSD</option><option>USDJPY</option><option>GBPJPY</option><option>USDVND</option><option>AUDUSD</option><option>USDCAD</option><option>NZDUSD</option><option>USDHKD</option><option>USDMXN</option><option>USDSGD</option><option>DXY</option></optgroup>
+<optgroup label="الطاقة"><option>USOIL</option><option>UKOIL</option><option>XNGUSD</option></optgroup>
+<optgroup label="السلع"><option>XPTUSD</option><option>XCUUSD</option></optgroup>
+<optgroup label="المؤشرات"><option>US500</option><option>US30</option><option>UK100</option><option>DE30</option><option>FR40</option><option>USTEC</option><option>AUS200</option><option>IN50</option><option>HK50</option><option>JP225</option><option>STOXX50</option></optgroup>
+<optgroup label="العملات الرقمية"><option>BTCUSD</option><option>ETHUSD</option><option>XRPUSD</option><option>BNBUSD</option><option>SOLUSD</option><option>DOGEUSD</option><option>CAKEUSD</option><option>ADAUSD</option><option>LINKUSD</option></optgroup>
+<optgroup label="الأسهم"><option>AAPL</option><option>TSLA</option><option>NFLX</option><option>MSFT</option><option>AMZN</option><option>AMD</option><option>NVDA</option><option>GOOGL</option><option>META</option><option>BA</option><option>ATVI</option><option>AVGO</option><option>INTC</option><option>IBM</option><option>ADBE</option><option>ABT</option><option>BABA</option><option>BAC</option><option>EBAY</option><option>EA</option><option>NKE</option><option>TME</option></optgroup>
 </select>
 <label for="frame">2 ـ تحديد الفريم</label>
-<select id="frame"><option value="M5">5 دقائق · M5</option><option value="M15">15 دقيقة · M15</option><option value="H1">ساعة · H1</option><option value="H4">4 ساعات · H4</option></select>
+<select id="frame"><option value="M1">دقيقة · M1</option><option value="M5" selected>5 دقائق · M5</option><option value="M15">15 دقيقة · M15</option><option value="H1">ساعة · H1</option><option value="H4">4 ساعات · H4</option><option value="D1">يومي · D1</option></select>
 <button id="analyze">3 ـ تحليل السوق</button>
 <div id="status" class="status">اختر السوق والفريم ثم اضغط تحليل السوق.</div>
 </section>
 <section class="panel signal">
-<small>نتيجة التحليل</small><div id="decision" class="decision wait">بانتظار التحليل</div><div id="reason" class="reason">ستظهر هنا إشارة الشراء أو البيع أو الانتظار.</div>
+<small>نتيجة التحليل</small><div id="decision" class="decision wait">بانتظار التحليل</div><div id="reason" class="reason">ستظهر هنا إشارة الشراء أو البيع.</div>
 </section>
 <section class="panel"><div class="grid">
 <div class="cell"><span>سعر الدخول</span><b id="entry">—</b></div>
@@ -37,7 +43,7 @@
 <script>
 const API='https://czezgeslfxhpbrtquffy.supabase.co/functions/v1/market-data-proxy';
 const $=id=>document.getElementById(id);
-const tfms={M5:300000,M15:900000,H1:3600000,H4:14400000};
+const tfms={M1:60000,M5:300000,M15:900000,H1:3600000,H4:14400000,D1:86400000};
 const fmt=n=>Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:5}):'—';
 function ema(values,period){if(values.length<period)return NaN;let v=values.slice(0,period).reduce((a,b)=>a+b,0)/period,k=2/(period+1);for(let i=period;i<values.length;i++)v=values[i]*k+v*(1-k);return v}
 function rsi(values,p=14){if(values.length<=p)return NaN;let up=0,down=0;for(let i=values.length-p;i<values.length;i++){let d=values[i]-values[i-1];if(d>0)up+=d;else down-=d}return down===0?100:100-100/(1+up/down)}
@@ -61,22 +67,22 @@ async function analyze(){
   if(age>tfms[timeFrame]*3)throw Error('بيانات السوق قديمة. لن أعطيك صفقة على سعر غير محدث.');
   const closes=unique.map(x=>x.close),e20=ema(closes,20),e50=ema(closes,50),momentum=rsi(closes),volatility=atr(unique);
   if(![e20,e50,momentum,volatility].every(Number.isFinite)||volatility<=0)throw Error('تعذر حساب المؤشرات من البيانات الحالية.');
-  let side='انتظار',why='شروط الدخول غير مكتملة؛ الأفضل عدم الدخول حالياً.',score=0;
+  let side='لا توجد فرصة دخول',why='شروط الدخول غير مكتملة حالياً.',score=0;
   if(last.close>e20)score++;if(e20>e50)score++;if(momentum>=52&&momentum<=68)score++;
   if(last.close<e20)score--;if(e20<e50)score--;if(momentum>=32&&momentum<=48)score--;
   if(score===3){side='شراء';why='السعر فوق المتوسطات والزخم يدعم الصعود.'}
   else if(score===-3){side='بيع';why='السعر تحت المتوسطات والزخم يدعم الهبوط.'}
-  $('decision').textContent=side==='انتظار'?'انتظار — لا تدخل':side;
+  $('decision').textContent=side;
   $('decision').className='decision '+(side==='شراء'?'buy':side==='بيع'?'sell':'wait');
   $('reason').textContent=why+' · '+symbolCode+' / '+timeFrame+' · الإغلاق الأخير '+fmt(last.close);
   $('score').textContent=Math.abs(score)+'/3 شروط';
-  if(side!=='انتظار'){
+  if(side==='شراء'||side==='بيع'){
    const distance=volatility*1.5,direction=side==='شراء'?1:-1,entry=last.close;
    $('entry').textContent=fmt(entry);$('stop').textContent=fmt(entry-direction*distance);
    $('target1').textContent=fmt(entry+direction*distance);$('target2').textContent=fmt(entry+direction*distance*2);$('target3').textContent=fmt(entry+direction*distance*3);
   }
   $('status').textContent='تم التحليل · '+unique.length+' شمعة مغلقة · '+new Date().toLocaleString('ar');
- }catch(error){$('decision').textContent='لا توجد صفقة';$('decision').className='decision wait';$('reason').textContent=error.message;$('status').textContent='تعذر إصدار إشارة'}
+ }catch(error){$('decision').textContent='لا توجد فرصة دخول';$('decision').className='decision wait';$('reason').textContent=error.message;$('status').textContent='تعذر إصدار إشارة'}
  finally{btn.disabled=false}
 }
 $('analyze').addEventListener('click',analyze);
