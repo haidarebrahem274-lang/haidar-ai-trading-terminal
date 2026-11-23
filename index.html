@@ -1,90 +1,30 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#08111f">
-<title>HAIDAR AI TRADING</title>
-<style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#08111f;color:#f5f7fb;font-family:system-ui,Arial,sans-serif;padding:18px}.app{max-width:480px;margin:30px auto}.head{text-align:center;margin-bottom:25px}.head h1{font-size:25px;color:#61dfc6;margin:0}.head p{color:#9aabc0;font-size:13px;margin-top:8px}.panel{background:#122033;border:1px solid #263b52;border-radius:18px;padding:18px;margin:14px 0}label{display:block;color:#b9c8d9;font-size:13px;margin:0 0 8px}select,button{width:100%;min-height:52px;border-radius:12px;border:1px solid #354b63;background:#091625;color:#fff;padding:12px 14px;font-size:16px;margin-bottom:16px}button{background:#12a68f;border:0;font-weight:800;font-size:17px;margin:4px 0 0;cursor:pointer}button:disabled{opacity:.55}.signal{text-align:center;padding:24px 12px}.signal small{color:#9aabc0}.decision{font-size:32px;font-weight:900;margin:10px 0}.buy{color:#4ce0a4}.sell{color:#ff8796}.wait{color:#ffd36c}.reason{font-size:13px;color:#b5c4d5;line-height:1.8}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.cell{background:#091625;border-radius:12px;padding:14px}.cell span{display:block;color:#94a8bd;font-size:12px}.cell b{display:block;font-size:19px;margin-top:6px;overflow-wrap:anywhere}.status{text-align:center;color:#9aabc0;font-size:12px;line-height:1.8;margin-top:12px}.foot{text-align:center;color:#8293a9;font-size:11px;line-height:1.8;margin:18px 4px}
-</style>
-</head>
-<body><main class="app">
-<header class="head"><h1>HAIDAR AI TRADING</h1><p>حلّل السوق وخذ قراراً واضحاً</p></header>
-<section class="panel">
-<label for="market">1 ـ اختيار السوق</label>
-<select id="market">
-<option value="XAUUSD">الذهب · XAUUSD</option><option value="XAGUSD">الفضة · XAGUSD</option>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080d18"><title>HAIDAR Trading Terminal</title><style>
+:root{color-scheme:dark;--bg:#080d18;--panel:#121d30;--line:#26364e;--muted:#91a1b8;--mint:#4ce0c1;--green:#4ce0a4;--red:#ff8194;--gold:#f4ca70}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1b3b54,transparent 50%),var(--bg);color:#f5f7fc;font-family:system-ui,Arial;padding:22px 14px}.wrap{max-width:880px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;margin:4px 0 26px}.brand{display:flex;gap:12px;align-items:center}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#65eed0,#168b89);display:grid;place-items:center;color:#06151b;font-weight:900;font-size:22px}.brand b{letter-spacing:1px}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.pill{font-size:11px;color:#aebbd0;border:1px solid var(--line);background:#111c2d;border-radius:30px;padding:8px 12px}.intro{margin-bottom:18px}.intro small{color:var(--mint);font-weight:700;letter-spacing:1px}.intro h1{font-size:clamp(25px,5vw,35px);margin:7px 0}.intro p{font-size:13px;color:var(--muted);margin:0}.panel{background:linear-gradient(145deg,#152238,#101a2b);border:1px solid var(--line);border-radius:19px;padding:19px;box-shadow:0 18px 45px #0003}.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:end}.field label{display:block;color:#aab9ce;font-size:12px;margin-bottom:8px}.field select,button{width:100%;height:51px;border-radius:12px;border:1px solid #344760;background:#0a1525;color:white;padding:0 12px;font-size:14px}.field select:focus{outline:1px solid var(--mint)}button{border:0;background:linear-gradient(110deg,#51e0bd,#2aa8a5);color:#061b20;font-weight:800;font-size:15px;cursor:pointer}button:disabled{opacity:.55}.status{font-size:12px;color:var(--muted);margin-top:13px;min-height:18px}.result{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:15px}.decision{min-height:190px;display:flex;flex-direction:column;justify-content:center}.label{font-size:11px;color:var(--muted)}.signal{font-size:clamp(30px,6vw,43px);font-weight:900;margin:13px 0 8px}.buy{color:var(--green)}.sell{color:var(--red)}.none{color:var(--gold);font-size:27px}.reason{font-size:13px;line-height:1.9;color:#b4c2d4}.pricebox{background:#0a1525;border:1px solid #26374e;border-radius:15px;padding:17px;display:flex;flex-direction:column;justify-content:center}.price{font-size:30px;font-weight:800;direction:ltr;text-align:right;margin:8px 0}.spark{width:100%;height:65px}.spark path{fill:none;stroke:var(--mint);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.spark .area{fill:#4ce0c11c;stroke:none}.range{display:flex;justify-content:space-between;color:#7788a0;font-size:10px;direction:ltr}.levels{margin-top:15px}.levels h3{font-size:13px;margin:0 0 13px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{background:#0a1525;border:1px solid #26374e;border-radius:12px;padding:13px;min-width:0}.metric small{display:block;color:var(--muted);font-size:11px}.metric b{display:block;font-size:17px;margin-top:7px;direction:ltr;text-align:right;overflow-wrap:anywhere}.stop b{color:var(--red)}.target b{color:var(--green)}.note{margin-top:13px;background:#0b1728;border:1px solid #23344b;border-radius:11px;padding:11px 13px;color:#8798b0;font-size:11px;line-height:1.8}.foot{text-align:center;color:#687992;font-size:10px;line-height:1.8;margin:18px 5px}@media(max-width:640px){body{padding:15px 11px}.controls{grid-template-columns:1fr 1fr}.controls .action{grid-column:1/-1}.result{grid-template-columns:1fr}.decision{min-height:135px}.pricebox{min-height:140px}.grid{grid-template-columns:repeat(2,1fr)}.panel{padding:15px}.top{margin-bottom:20px}}
+</style></head><body><main class="wrap">
+<header class="top"><div class="brand"><div class="logo">H</div><div><b>HAIDAR TERMINAL</b><small>PERSONAL MARKET INTELLIGENCE</small></div></div><div class="pill">✦ مساحة التداول الخاصة</div></header>
+<section class="intro"><small>SMART TRADING DESK</small><h1>السوق أمامك. والقرار أوضح.</h1><p>تحليل فني سريع، مع مستويات دخول وأهداف واضحة عند توفر فرصة.</p></section>
+<section class="panel"><div class="controls">
+<div class="field"><label for="market">اختيار السوق</label><select id="market">
+<optgroup label="المعادن"><option value="XAUUSD">الذهب · XAUUSD</option><option value="XAGUSD">الفضة · XAGUSD</option><option value="XPTUSD">البلاتين · XPTUSD</option></optgroup>
 <optgroup label="الفوركس"><option>EURUSD</option><option>GBPUSD</option><option>USDJPY</option><option>GBPJPY</option><option>USDVND</option><option>AUDUSD</option><option>USDCAD</option><option>NZDUSD</option><option>USDHKD</option><option>USDMXN</option><option>USDSGD</option><option>DXY</option></optgroup>
-<optgroup label="الطاقة"><option>USOIL</option><option>UKOIL</option><option>XNGUSD</option></optgroup>
-<optgroup label="السلع"><option>XPTUSD</option><option>XCUUSD</option></optgroup>
+<optgroup label="الطاقة والسلع"><option>USOIL</option><option>UKOIL</option><option>XNGUSD</option><option>XCUUSD</option></optgroup>
 <optgroup label="المؤشرات"><option>US500</option><option>US30</option><option>UK100</option><option>DE30</option><option>FR40</option><option>USTEC</option><option>AUS200</option><option>IN50</option><option>HK50</option><option>JP225</option><option>STOXX50</option></optgroup>
 <optgroup label="العملات الرقمية"><option>BTCUSD</option><option>ETHUSD</option><option>XRPUSD</option><option>BNBUSD</option><option>SOLUSD</option><option>DOGEUSD</option><option>CAKEUSD</option><option>ADAUSD</option><option>LINKUSD</option></optgroup>
 <optgroup label="الأسهم"><option>AAPL</option><option>TSLA</option><option>NFLX</option><option>MSFT</option><option>AMZN</option><option>AMD</option><option>NVDA</option><option>GOOGL</option><option>META</option><option>BA</option><option>ATVI</option><option>AVGO</option><option>INTC</option><option>IBM</option><option>ADBE</option><option>ABT</option><option>BABA</option><option>BAC</option><option>EBAY</option><option>EA</option><option>NKE</option><option>TME</option></optgroup>
-</select>
-<label for="frame">2 ـ تحديد الفريم</label>
-<select id="frame"><option value="M1">دقيقة · M1</option><option value="M5" selected>5 دقائق · M5</option><option value="M15">15 دقيقة · M15</option><option value="H1">ساعة · H1</option><option value="H4">4 ساعات · H4</option><option value="D1">يومي · D1</option></select>
-<button id="analyze">3 ـ تحليل السوق</button>
-<div id="status" class="status">اختر السوق والفريم ثم اضغط تحليل السوق.</div>
-</section>
-<section class="panel signal">
-<small>نتيجة التحليل</small><div id="decision" class="decision wait">بانتظار التحليل</div><div id="reason" class="reason">ستظهر هنا إشارة الشراء أو البيع.</div>
-</section>
-<section class="panel"><div class="grid">
-<div class="cell"><span>سعر الدخول</span><b id="entry">—</b></div>
-<div class="cell"><span>وقف الخسارة</span><b id="stop">—</b></div>
-<div class="cell"><span>الهدف الأول</span><b id="target1">—</b></div>
-<div class="cell"><span>الهدف الثاني</span><b id="target2">—</b></div>
-<div class="cell"><span>الهدف الثالث</span><b id="target3">—</b></div>
-<div class="cell"><span>قوة توافق الشروط</span><b id="score">—</b></div>
-</div></section>
-<p class="foot">البيانات من مزوّد خارجي وليست بث Headway المباشر. الموقع للتحليل فقط ولا ينفّذ صفقات. لا توجد نسبة نجاح مضمونة؛ جرّب الإشارة على حساب تجريبي أولاً.</p>
-</main>
-<script>
-const API='https://czezgeslfxhpbrtquffy.supabase.co/functions/v1/market-data-proxy';
-const $=id=>document.getElementById(id);
-const tfms={M1:60000,M5:300000,M15:900000,H1:3600000,H4:14400000,D1:86400000};
-const fmt=n=>Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:5}):'—';
-function ema(values,period){if(values.length<period)return NaN;let v=values.slice(0,period).reduce((a,b)=>a+b,0)/period,k=2/(period+1);for(let i=period;i<values.length;i++)v=values[i]*k+v*(1-k);return v}
-function rsi(values,p=14){if(values.length<=p)return NaN;let up=0,down=0;for(let i=values.length-p;i<values.length;i++){let d=values[i]-values[i-1];if(d>0)up+=d;else down-=d}return down===0?100:100-100/(1+up/down)}
-function atr(rows,p=14){if(rows.length<=p)return NaN;let sum=0;for(let i=rows.length-p;i<rows.length;i++){let x=rows[i],prev=rows[i-1].close;sum+=Math.max(x.high-x.low,Math.abs(x.high-prev),Math.abs(x.low-prev))}return sum/p}
-function clearResult(){['entry','stop','target1','target2','target3','score'].forEach(id=>$(id).textContent='—');$('decision').textContent='جارٍ التحليل';$('decision').className='decision wait';$('reason').textContent='يتم فحص بيانات السوق والشموع المغلقة.'}
-async function analyze(){
- const btn=$('analyze');if(btn.disabled)return;btn.disabled=true;clearResult();
- const symbolCode=$('market').value,timeFrame=$('frame').value;
- $('status').textContent='جارٍ جلب بيانات السوق...';
- try{
-  const response=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({symbolCode,timeFrame})});
-  const data=await response.json();if(!response.ok||data.ok===false)throw Error(data.error||data.note||'تعذر جلب بيانات السوق.');
-  if(data.symbolCode&&data.symbolCode.toUpperCase()!==symbolCode)throw Error('البيانات المستلمة لا تطابق السوق المختار.');
-  const candles=Array.isArray(data.candles)?data.candles:[];
-  const rows=candles.map(x=>({open:Number(x.open),high:Number(x.high),low:Number(x.low),close:Number(x.close),time:Date.parse(x.openTime)}))
-   .filter(x=>[x.open,x.high,x.low,x.close,x.time].every(Number.isFinite)&&x.open>0&&x.high>=Math.max(x.open,x.close)&&x.low<=Math.min(x.open,x.close)&&x.high>=x.low&&x.time+tfms[timeFrame]<=Date.now())
-   .sort((a,b)=>a.time-b.time);
-  const unique=[...new Map(rows.map(x=>[x.time,x])).values()];
-  if(unique.length<60)throw Error(data.note||('البيانات غير كافية: وصل '+unique.length+' شمعة، ونحتاج 60 شمعة مغلقة.'));
-  const last=unique[unique.length-1],age=Date.now()-(last.time+tfms[timeFrame]);
-  if(age>tfms[timeFrame]*3)throw Error('بيانات السوق قديمة. لن أعطيك صفقة على سعر غير محدث.');
-  const closes=unique.map(x=>x.close),e20=ema(closes,20),e50=ema(closes,50),momentum=rsi(closes),volatility=atr(unique);
-  if(![e20,e50,momentum,volatility].every(Number.isFinite)||volatility<=0)throw Error('تعذر حساب المؤشرات من البيانات الحالية.');
-  let side='لا توجد فرصة دخول',why='شروط الدخول غير مكتملة حالياً.',score=0;
-  if(last.close>e20)score++;if(e20>e50)score++;if(momentum>=52&&momentum<=68)score++;
-  if(last.close<e20)score--;if(e20<e50)score--;if(momentum>=32&&momentum<=48)score--;
-  if(score===3){side='شراء';why='السعر فوق المتوسطات والزخم يدعم الصعود.'}
-  else if(score===-3){side='بيع';why='السعر تحت المتوسطات والزخم يدعم الهبوط.'}
-  $('decision').textContent=side;
-  $('decision').className='decision '+(side==='شراء'?'buy':side==='بيع'?'sell':'wait');
-  $('reason').textContent=why+' · '+symbolCode+' / '+timeFrame+' · الإغلاق الأخير '+fmt(last.close);
-  $('score').textContent=Math.abs(score)+'/3 شروط';
-  if(side==='شراء'||side==='بيع'){
-   const distance=volatility*1.5,direction=side==='شراء'?1:-1,entry=last.close;
-   $('entry').textContent=fmt(entry);$('stop').textContent=fmt(entry-direction*distance);
-   $('target1').textContent=fmt(entry+direction*distance);$('target2').textContent=fmt(entry+direction*distance*2);$('target3').textContent=fmt(entry+direction*distance*3);
-  }
-  $('status').textContent='تم التحليل · '+unique.length+' شمعة مغلقة · '+new Date().toLocaleString('ar');
- }catch(error){$('decision').textContent='لا توجد فرصة دخول';$('decision').className='decision wait';$('reason').textContent=error.message;$('status').textContent='تعذر إصدار إشارة'}
- finally{btn.disabled=false}
-}
-$('analyze').addEventListener('click',analyze);
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</select></div>
+<div class="field"><label for="frame">تحديد الفريم</label><select id="frame"><option value="M1">دقيقة · M1</option><option value="M5" selected>5 دقائق · M5</option><option value="M15">15 دقيقة · M15</option><option value="H1">ساعة · H1</option><option value="H4">4 ساعات · H4</option><option value="D1">يومي · D1</option></select></div>
+<div class="action"><button id="analyze">تحليل السوق　↗</button></div></div><div id="status" class="status">اختر السوق والفريم ثم ابدأ التحليل.</div></section>
+<section class="result"><div class="panel decision"><div class="label">نتيجة التحليل الفني</div><div id="decision" class="signal none">جاهز للتحليل</div><div id="reason" class="reason">ستظهر إشارة واضحة عندما تتوافق شروط السوق.</div></div>
+<div class="panel pricebox"><div class="label">آخر سعر إغلاق متاح</div><div id="lastPrice" class="price">—</div><svg class="spark" viewBox="0 0 320 70" preserveAspectRatio="none"><path id="area" class="area" d=""></path><path id="line" d=""></path></svg><div class="range"><span id="low">LOW —</span><span id="high">HIGH —</span></div></div></section>
+<section class="panel levels"><h3>مستويات الصفقة</h3><div class="grid"><div class="metric"><small>سعر الدخول</small><b id="entry">—</b></div><div class="metric stop"><small>وقف الخسارة</small><b id="stop">—</b></div><div class="metric target"><small>الهدف الأول · 1R</small><b id="tp1">—</b></div><div class="metric target"><small>الهدف الثاني · 2R</small><b id="tp2">—</b></div></div><div class="note" id="detail">لا تظهر مستويات الصفقة إلا عند اكتمال شروط الدخول.</div></section>
+<p class="foot">البيانات من مزوّد خارجي وليست بثاً مباشراً من وسيطك. الأداة للتحليل فقط ولا تنفّذ صفقات أو تضمن الربح. اختبر أي إشارة على حساب تجريبي.</p>
+</main><script>
+const API='https://czezgeslfxhpbrtquffy.supabase.co/functions/v1/market-data-proxy',$=id=>document.getElementById(id),tfms={M1:60000,M5:300000,M15:900000,H1:3600000,H4:14400000,D1:86400000},fmt=n=>Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:5}):'—';
+function ema(a,p){if(a.length<p)return NaN;let v=a.slice(0,p).reduce((x,y)=>x+y,0)/p,k=2/(p+1);for(let i=p;i<a.length;i++)v=a[i]*k+v*(1-k);return v}
+function rsi(a,p=14){if(a.length<=p)return NaN;let u=0,dn=0;for(let i=a.length-p;i<a.length;i++){let d=a[i]-a[i-1];if(d>0)u+=d;else dn-=d}return dn===0?100:100-100/(1+u/dn)}
+function atr(a,p=14){if(a.length<=p)return NaN;let s=0;for(let i=a.length-p;i<a.length;i++){let x=a[i],pclose=a[i-1].close;s+=Math.max(x.high-x.low,Math.abs(x.high-pclose),Math.abs(x.low-pclose))}return s/p}
+function draw(a){let v=a.slice(-36).map(x=>x.close),lo=Math.min(...v),hi=Math.max(...v),span=hi-lo||1,pts=v.map((x,i)=>[i*320/(v.length-1),62-(x-lo)/span*52]),d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');$('line').setAttribute('d',d);$('area').setAttribute('d',d+' L320,70 L0,70 Z');$('low').textContent='LOW '+fmt(lo);$('high').textContent='HIGH '+fmt(hi)}
+function reset(){$('decision').textContent='جارٍ التحليل';$('decision').className='signal none';$('reason').textContent='يتم فحص الشموع المغلقة.';['entry','stop','tp1','tp2','lastPrice'].forEach(id=>$(id).textContent='—');['line','area'].forEach(id=>$(id).setAttribute('d',''))}
+async function analyze(){let btn=$('analyze');if(btn.disabled)return;btn.disabled=true;reset();let symbolCode=$('market').value,timeFrame=$('frame').value;$('status').textContent='جارٍ جلب بيانات السوق…';try{let res=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({symbolCode,timeFrame})}),data=await res.json();if(!res.ok||data.ok===false)throw Error(data.error||data.note||'تعذر جلب البيانات');if(data.symbolCode&&data.symbolCode.toUpperCase()!==symbolCode)throw Error('الرمز المستلم لا يطابق السوق المختار');let a=(Array.isArray(data.candles)?data.candles:[]).map(x=>({open:+x.open,high:+x.high,low:+x.low,close:+x.close,t:Date.parse(x.openTime)})).filter(x=>[x.open,x.high,x.low,x.close,x.t].every(Number.isFinite)&&x.open>0&&x.high>=Math.max(x.open,x.close)&&x.low<=Math.min(x.open,x.close)&&x.high>=x.low&&x.t+tfms[timeFrame]<=Date.now()).sort((x,y)=>x.t-y.t);a=[...new Map(a.map(x=>[x.t,x])).values()];if(a.length<60)throw Error(data.note||'البيانات غير كافية؛ يلزم 60 شمعة مغلقة');let last=a.at(-1);if(Date.now()-(last.t+tfms[timeFrame])>tfms[timeFrame]*3)throw Error('البيانات قديمة؛ لم نصدر إشارة');let c=a.map(x=>x.close),e20=ema(c,20),e50=ema(c,50),m=rsi(c),v=atr(a);if(![e20,e50,m,v].every(Number.isFinite)||v<=0)throw Error('المؤشرات غير مكتملة');let up=(last.close>e20?1:0)+(e20>e50?1:0)+(m>50&&m<70?1:0),dn=(last.close<e20?1:0)+(e20<e50?1:0)+(m<50&&m>30?1:0),side=up===3?'BUY':dn===3?'SELL':'NONE';$('lastPrice').textContent=fmt(last.close);draw(a);$('decision').className='signal '+(side==='BUY'?'buy':side==='SELL'?'sell':'none');if(side==='NONE'){$('decision').textContent='لا توجد فرصة دخول';$('reason').textContent='شروط الاتجاه والزخم غير متوافقة بالكامل. الأفضل انتظار فرصة أوضح.';$('detail').textContent='لم تُعرض مستويات دخول لأن شروط الصفقة لم تكتمل.'}else{let d=v*1.5,dir=side==='BUY'?1:-1;$('decision').textContent=side==='BUY'?'شراء':'بيع';$('reason').textContent=side==='BUY'?'الاتجاه والزخم يدعمان السيناريو الصاعد.':'الاتجاه والزخم يدعمان السيناريو الهابط.';$('entry').textContent=fmt(last.close);$('stop').textContent=fmt(last.close-dir*d);$('tp1').textContent=fmt(last.close+dir*d);$('tp2').textContent=fmt(last.close+dir*d*2);$('detail').textContent='توافق 3 شروط فنية. وقف الخسارة محسوب باستخدام ATR؛ تحقق من السبريد ومواصفات العقد لدى وسيطك.'}$('status').textContent='اكتمل التحليل · '+a.length+' شمعة مغلقة · '+symbolCode+' / '+timeFrame+' · '+new Date().toLocaleTimeString('ar')}catch(e){$('decision').textContent='تعذر التحليل';$('decision').className='signal none';$('reason').textContent=e.message;$('detail').textContent='قد لا تتوفر بيانات لهذا السوق أو الفريم حالياً.';$('status').textContent='لم تكتمل عملية التحليل'}finally{btn.disabled=false}}
+$('analyze').addEventListener('click',analyze);if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script></body></html>
