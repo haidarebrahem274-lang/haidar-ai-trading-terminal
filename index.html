@@ -34,13 +34,15 @@ async function collectSmallCandles(){
   const symbolCode=$('market').value,timeFrame=$('frame').value,key=symbolCode+'/'+timeFrame;
   if(!['M1','M5','M15'].includes(timeFrame)||document.hidden||$('analyze').disabled)return;
   try{
-    const res=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({action:'collect',symbolCode,timeFrame})});
-    const data=await res.json();
+    const frames=['M1','M5','M15'];
+    const results=await Promise.all(frames.map(async tf=>{
+      const res=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({action:'collect',symbolCode,timeFrame:tf})});
+      return {tf,data:await res.json()};
+    }));
     if(key!==collectorKey)return;
-    if(data?.storedCount!==undefined){
-      const count=Number(data.storedCount)||0;
-      $('status').textContent=count>=200?'اكتمل سجل '+timeFrame+' · '+count+' شمعة محفوظة. اضغط تحليل السوق.':'تجميع تلقائي لـ '+timeFrame+' · '+count+'/200 شمعة محفوظة في قاعدة البيانات.';
-    }else if(data?.note){$('status').textContent=data.note;}
+    const counts=results.map(x=>x.tf+' '+(Number(x.data?.storedCount)||0)+'/200').join(' · ');
+    const ready=results.every(x=>(Number(x.data?.storedCount)||0)>=200);
+    $('status').textContent=ready?'اكتمل تجميع الفريمات الصغيرة الثلاثة · '+counts+'.':'تجميع تلقائي للفريمات الصغيرة · '+counts+' شمعة محفوظة.';
   }catch(e){if(key===collectorKey)$('status').textContent='تعذر تحديث سجل الشموع مؤقتاً؛ سيُعاد المحاولة تلقائياً.';}
 }
 function startSmallCollector(){
